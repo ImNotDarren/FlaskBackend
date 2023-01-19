@@ -1,6 +1,6 @@
 import pickle
 
-from flask import Flask, request, render_template
+from flask import Flask
 from flask_cors import CORS, cross_origin
 
 from src.get_df import get_df
@@ -36,4 +36,4 @@ def main(url, year):
 
 if __name__ == '__main__':
     # Start the Flask app
-    app.run()  # Local
+    application.run()  # Local
