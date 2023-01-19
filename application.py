@@ -1,6 +1,6 @@
 import pickle
 
-from flask import Flask, app
+from flask import Flask
 from flask_cors import CORS, cross_origin
 
 from src.get_df import get_df
@@ -21,13 +21,13 @@ def predict(url, year):
     return y, df.iloc[0]['price']
 
 
-@app.route('/')
+@application.route('/')
 @cross_origin()
 def hello():
     return "<h1>It's alive!!!🧟‍♂️</h1>"
 
 
-@app.route('/cpp/<url>/<year>')
+@application.route('/cpp/<url>/<year>')
 @cross_origin()
 def main(url, year):
     link = 'https://www.cars.com/vehicledetail/' + url + '/'
