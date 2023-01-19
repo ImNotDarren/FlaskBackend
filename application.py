@@ -18,7 +18,7 @@ def predict(url, year):
 
     X = set_X(df)
     y = lr.predict(X)
-    return y, df.iloc[0]['price']
+    return y[0]
 
 
 @application.route('/')
@@ -31,8 +31,8 @@ def hello():
 @cross_origin()
 def main(url, year):
     link = 'https://www.cars.com/vehicledetail/' + url + '/'
-    predictedPrice, price = predict(link, year)
-    return {'price': price, 'predictedPrice': predictedPrice[0], 'year': year}
+    predictedPrice = predict(link, year)
+    return {'predictedPrice': predictedPrice}
 
 
 if __name__ == '__main__':
