@@ -6,8 +6,8 @@ from flask_cors import CORS, cross_origin
 from src.get_df import get_df
 from src.set_x import set_X
 
-app = Flask('cpp')
-CORS(app)
+application = Flask(__name__)
+CORS(application)
 
 def predict(url, year):
     # load the model from pickle file
