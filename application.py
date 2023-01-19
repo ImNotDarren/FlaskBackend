@@ -1,6 +1,6 @@
 import pickle
 
-from flask import Flask
+from flask import Flask, app
 from flask_cors import CORS, cross_origin
 
 from src.get_df import get_df
@@ -22,6 +22,7 @@ def predict(url, year):
 
 
 @app.route('/')
+@cross_origin()
 def hello():
     return "<h1>It's alive!!!🧟‍♂️</h1>"
 
