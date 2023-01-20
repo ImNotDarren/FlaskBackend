@@ -60,13 +60,14 @@ def afib():
     if data.shape[0] > 10:
         return {'error': 'Please include only 10 rows of data!'}
 
-    dataset = torch.from_numpy(data[:1])
+    # dataset = torch.from_numpy(data[:1])
+    #
+    # PPG_feature, PPG_out = PPG_model(dataset)
+    # PPG_predicted = PPG_out.argmax(1)
+    # PPG_predicted_prob = PPG_out[:, 1]
 
-    PPG_feature, PPG_out = PPG_model(dataset)
-    PPG_predicted = PPG_out.argmax(1)
-    PPG_predicted_prob = PPG_out[:, 1]
-
-    return {'data': data.tolist(), 'pred': PPG_predicted_prob.tolist(), 'error': 0}
+    # return {'data': data.tolist(), 'pred': PPG_predicted_prob.tolist(), 'error': 0}
+    return {'data': data.tolist(), 'pred': 'TODO', 'error': 0}
 
 
 if __name__ == '__main__':
