@@ -47,10 +47,10 @@ def main(url, year):
 @cross_origin()
 def afib():
     MODEL_PATH = 'src/afib_model/saved_models/epoch_30_ppglr_0.0001_lambda_0.9/PPG_best_1.pt'
-    PPG_model = Resnet34().cpu()
-    state_dict = torch.load(MODEL_PATH, map_location=torch.device('cpu'))
-    PPG_model.load_state_dict(state_dict)
-    PPG_model.eval()
+    # PPG_model = Resnet34().cpu()
+    # state_dict = torch.load(MODEL_PATH, map_location=torch.device('cpu'))
+    # PPG_model.load_state_dict(state_dict)
+    # PPG_model.eval()
     # convert_torch2onnx(PPG_model, 'PPG_model.onnx', (1, 2400))
 
     uploaded_file = request.files['file_from_react']
