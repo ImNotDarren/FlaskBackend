@@ -1,9 +1,5 @@
-import sys
-
 import numpy as np
 from torch.utils.data import DataLoader
-from torch2onnx2trt import convert_torch2onnx
-
 from src.afib_model.resnet1d import Resnet34
 
 import pickle
@@ -53,12 +49,12 @@ def afib():
     # PPG_model.eval()
     # convert_torch2onnx(PPG_model, 'PPG_model.onnx', (1, 2400))
 
-    # uploaded_file = request.files['file_from_react']
-    # data = np.loadtxt(uploaded_file, delimiter=',', dtype='float32')
-    # # check if the data's format is correct
-    # # 1. less than 10 rows
-    # if data.shape[0] > 10:
-    #     return {'error': 'Please include only 10 rows of data!'}
+    uploaded_file = request.files['file_from_react']
+    data = np.loadtxt(uploaded_file, delimiter=',', dtype='float32')
+    # check if the data's format is correct
+    # 1. less than 10 rows
+    if data.shape[0] > 10:
+        return {'error': 'Please include only 10 rows of data!'}
 
     # dataset = torch.from_numpy(data[:1])
     #
@@ -67,7 +63,7 @@ def afib():
     # PPG_predicted_prob = PPG_out[:, 1]
 
     # return {'data': data.tolist(), 'pred': PPG_predicted_prob.tolist(), 'error': 0}
-    return {'data': '123', 'pred': 'TODO', 'error': 0}
+    return {'data': data.tolist(), 'pred': 'TODO', 'error': 0}
 
 
 if __name__ == '__main__':
