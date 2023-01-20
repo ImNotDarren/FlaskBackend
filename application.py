@@ -55,7 +55,7 @@ def afib():
     # 1. less than 10 rows
     if data.shape[0] > 10:
         return {'error': 'Please include only 10 rows of data!'}
- 
+
     # dataset = torch.from_numpy(data[:1])
     # PPG_feature, PPG_out = PPG_model(dataset)
     # PPG_predicted = PPG_out.argmax(1)
