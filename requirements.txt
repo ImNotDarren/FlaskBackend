@@ -39,7 +39,6 @@ rich==13.2.0
 scikit-learn==1.2.0
 scipy==1.10.0
 six==1.16.0
-sklearn==0.0.post1
 soupsieve==2.3.2.post1
 SQLAlchemy==1.4.46
 sqlalchemy-mate==1.4.28.3
