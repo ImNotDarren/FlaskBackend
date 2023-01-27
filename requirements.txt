@@ -41,9 +41,9 @@ SQLAlchemy==1.4.46
 sqlalchemy-mate==1.4.28.3
 sympy==1.11.1
 threadpoolctl==3.1.0
-torch==1.13.1
-torchaudio==0.13.1
-torchvision==0.14.1
+torch==1.4.1
+torchaudio==0.4.0a0+ba6d67b
+torchvision==0.5.0
 typing_extensions==4.4.0
 urllib3==1.26.14
 uszipcode==1.0.1
