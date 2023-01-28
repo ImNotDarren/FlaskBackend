@@ -12,7 +12,7 @@ if __name__ == '__main__':
     state_dict = torch.load(MODEL_PATH, map_location=torch.device('cpu'))
     PPG_model.load_state_dict(state_dict)
 
-    PPG_model.eval()
+    print(PPG_model.eval())
     dummy_input = torch.randn(1, 1, 2400).cpu()
     data = np.loadtxt('./test2.csv', delimiter=',', dtype='float32')
     dataset = Dataset_ori(data)
