@@ -75,7 +75,7 @@ def afib():
     prob_list = []
     for batch_idx, (PPG) in enumerate(dataLoader):
         PPG = PPG.to('cpu').float()
-        PPG_feature, PPG_out = PPG_model(PPG)
+        PPG_out = PPG_model(PPG)
         PPG_predicted = PPG_out.argmax(1)
         PPG_predicted_prob = PPG_out[:, 1]
         classification_list.append(PPG_predicted.detach().cpu().numpy().tolist()[0])
