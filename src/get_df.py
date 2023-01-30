@@ -152,6 +152,7 @@ def is_cylinder_engine(row):
     else:
         return 0
 
+
 def get_drivetrain(row):
     i = row.drivetrain
     four = re.compile('.*(Front|Rear|FWD).*')
@@ -163,16 +164,17 @@ def get_drivetrain(row):
     else:
         return 'Others'
 
+
 def get_major_city(row):
     engine = SearchEngine()
     zipcode = engine.by_zipcode(row.zipcode)
     return zipcode.major_city
 
+
 def get_population(row):
     engine = SearchEngine()
     zipcode = engine.by_zipcode(row.zipcode)
     return zipcode.population
-
 
 
 def get_df(url, year):
@@ -183,13 +185,24 @@ def get_df(url, year):
     soup = bs(res, features="html.parser")
 
     # get name
-    name = soup.find(name='h1', attrs={'class': 'listing-title'}).text
+    name = soup.find(name='h1', attrs={'class': 'listing-title'})
+    if name is not None:
+        name = name.text
+    else:
+        df = pd.DataFrame(columns=['age'])
+        df['age'] = [-1]
+        return df
+
     df['name'] = [name]
 
     # get price
-    price = soup.find(name='span', attrs={'class': 'primary-price'}).text
-    pr_list = re.findall(r'\d+', price)
-    price = ''.join(pr_list)
+    price = soup.find(name='span', attrs={'class': 'primary-price'})
+    if price is not None:
+        price = price.text
+        pr_list = re.findall(r'\d+', price)
+        price = ''.join(pr_list)
+    else:
+        price = -1
     df['price'] = [price]
 
     # get mileage
@@ -200,7 +213,7 @@ def get_df(url, year):
 
     # get drivetrain
     dt = soup.find(name='dt', text='Drivetrain')
-    if dt == None:
+    if dt is None:
         df['drivetrain'] = ['']
     else:
         dt = dt.next.next.next.text
@@ -208,7 +221,7 @@ def get_df(url, year):
 
     # get mpg
     mpg = soup.find(name='a', attrs={'class': 'sds-tooltip__trigger'})
-    if mpg != None:
+    if mpg is not None:
         mpg = mpg.previous_sibling.previous_sibling.text
         df['mpg'] = [mpg]
     else:
@@ -216,7 +229,7 @@ def get_df(url, year):
 
     # get fuel type
     fuel_type = soup.find(name='dt', text='Fuel type')
-    if fuel_type == None:
+    if fuel_type is None:
         df['fuel_type'] = ['']
     else:
         fuel_type = fuel_type.next.next.next.text
@@ -224,7 +237,7 @@ def get_df(url, year):
 
     # get transmission
     transmission = soup.find(name='dt', text='Transmission')
-    if transmission == None:
+    if transmission is None:
         df['transmission'] = ['']
     else:
         transmission = transmission.next.next.next.text
@@ -232,7 +245,7 @@ def get_df(url, year):
 
     # get engine
     engine = soup.find(name='dt', text='Engine')
-    if engine == None:
+    if engine is None:
         df['engine'] = ['']
     else:
         engine = engine.next.next.next.text
@@ -240,7 +253,7 @@ def get_df(url, year):
 
     # get zip code
     zipcode = soup.find(name='div', attrs={'class': 'dealer-address'})
-    if zipcode == None:
+    if zipcode is None:
         df['zipcode'] = [0]
     else:
         zipcode = zipcode.text
@@ -248,7 +261,7 @@ def get_df(url, year):
 
     # get one_owner
     oneowner = soup.find(name='dd', attrs={'data-qa': 'one-owner-value'})
-    if oneowner == None:
+    if oneowner is None:
         oneowner = 3
     else:
         if oneowner.text == 'Yes':
@@ -259,7 +272,7 @@ def get_df(url, year):
 
     # adding personal use
     personal_use = soup.find(name='dd', attrs={'data-qa': 'personal-use-value'})
-    if personal_use == None:
+    if personal_use is None:
         personal_use = 3
     else:
         if personal_use.text == 'Yes':

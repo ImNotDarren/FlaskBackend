@@ -15,6 +15,12 @@ application = Flask(__name__)
 CORS(application)
 
 
+@application.route('/')
+@cross_origin()
+def hello():
+    return "<h1>It's alive!!!🧟‍♂️</h1>"
+
+
 def predict(url, year):
     # load the model from pickle file
     with open('models/ridge_model.pkl', 'rb') as f:
@@ -22,15 +28,13 @@ def predict(url, year):
 
     df = get_df(url, year)
 
+    if df.iloc[0]['age'] == -1:
+        # if the car is not listed or the url is not correct
+        return -1
+
     X = set_X(df)
     y = lr.predict(X)
     return y[0]
-
-
-@application.route('/')
-@cross_origin()
-def hello():
-    return "<h1>It's alive!!!🧟‍♂️</h1>"
 
 
 @application.route('/cpp/<url>/<year>')
